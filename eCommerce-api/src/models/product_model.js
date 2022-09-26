@@ -3,10 +3,11 @@ const { Schema, model } = require("mongoose");
 const productSchema = new Schema({
   productID: { type: String, required: true, unique: true },
   title: { type: String, required: true },
+  category: { type: Schema.Types.ObjectId, ref: "Category" },
   description: { type: String, default: "" },
   styles: { type: Array, default: [] },
   prices: { type: Number, required: true },
-  images: { type: Array,default :[] },
+  images: { type: Array, default: [] },
   addedOn: { type: Date, default: Date.now },
 });
 

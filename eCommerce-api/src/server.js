@@ -17,6 +17,9 @@ mongoose
     
     const productRoutes = require("./routes/product_routes");
     app.use("/api/product", productRoutes);
+    
+    const categoryRoutes = require("./routes/category_routes");
+    app.use("/api/category", categoryRoutes);
   });
 
 const PORT = 5000;
