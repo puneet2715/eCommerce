@@ -48,4 +48,16 @@ router.post("/login", async function (req, res) {
   res.json({ success: true, data: foundUser });
 });
 
+router.put("/", async function (req, res) {
+  const userData = req.body;
+  const userID = userData.userID;
+  const result = await UserModel.findOneAndUpdate({ userID: userID }, userData);
+
+  if (!result) {
+    return res.json({ success: false, error: "user-not-found" });
+  }
+
+  res.json({ success: true, data: userData }); //result is the model of the old data
+});
+
 module.exports = router;

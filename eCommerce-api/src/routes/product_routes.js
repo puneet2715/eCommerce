@@ -38,4 +38,19 @@ router.delete("/", async function (req, res) {
   res.json({ success: true, data: result });
 });
 
+router.put("/", async function (req, res) {
+  const productData = req.body;
+  const productID = productData.productID;
+  const result = await ProductModel.findOneAndUpdate(
+    { productID: productID },
+    productData
+  );
+
+  if (!result) {
+    return res.json({ success: false, error: "product-not-found" });
+  }
+
+  res.json({ success: true, data: productData }); //result is the model of the old data
+});
+
 module.exports = router;
