@@ -2,6 +2,11 @@ const express = require("express");
 const app = express();
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
+
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(express.static('uploads'))
+
 require("dotenv").config()
 mongoose
   .connect(
@@ -20,12 +25,12 @@ mongoose
     
     const categoryRoutes = require("./routes/category_routes");
     app.use("/api/category", categoryRoutes);
+    
+    const fileRoutes = require("./routes/file_routes");
+    app.use("/api/file", fileRoutes);
   });
 
 const PORT = 5000;
-
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
 
 app.listen(PORT, function () {
   console.log(`Server started on PORT: ${PORT}`);
